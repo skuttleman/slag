@@ -1,4 +1,6 @@
 {:project skuttleman/slag-test
  :paths   ["src"]
- :deps    {etaoin/etaoin                 {:mvn/version "1.1.43"}
-           org.clojure/clojure {:mvn/version "1.12.5"}}}
+ :deps    {etaoin/etaoin             {:mvn/version "1.1.43"}
+           org.clojure/clojure       {:mvn/version "1.12.5"}
+           org.clojure/clojurescript {:mvn/version "1.12.145"}
+           org.clojure/core.async    {:mvn/version "1.9.865"}}}
