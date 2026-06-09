@@ -48,4 +48,4 @@ test: check-deps lint build-test ## Run CLJS, server, and UI tests (requires clo
 		$(CLJ) -M:test -m slag.test.cljs.runner; \
 	fi
 	@echo "running kaocha tests..."
-	@HEADLESS=true SCREENSHOT=true $(CLJ) -M:test -m kaocha.runner
+	$(CLJ) -M:test -m kaocha.runner
