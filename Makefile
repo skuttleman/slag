@@ -5,13 +5,7 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 # Tools (can be overridden in the environment)
-FOREMAN ?= foreman
-NPM ?= npm
 CLJ ?= clojure
-NPX ?= npx
-SASS ?= sass
-LCOV ?= lcov
-GENHTML ?= genhtml
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort \
