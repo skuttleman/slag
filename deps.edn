@@ -1,0 +1,17 @@
+{:project skuttleman/slag
+ :paths   ["src"]
+ :deps    {skuttleman/slag-core {:local/root "core-utils"}
+           skuttleman/slag-test {:local/root "test-utils"}}
+ :aliases {:dev      {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0"}}}
+           :test     {:extra-paths ["core-utils/test"]
+                      :extra-deps  {etaoin/etaoin       {:mvn/version "1.1.43"}
+                                    lambdaisland/kaocha {:mvn/version "1.91.1392"}}}
+           :lint     {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2026.05.25"}}
+                      :main-opts  ["-m"
+                                   "clj-kondo.main"
+                                   "--lint"
+                                   "core-utils/src"
+                                   "test-utils/src"]}
+           #_#_:shadow {:extra-deps {thheller/shadow-cljs {:mvn/version "3.4.11"}}}
+           :intellij {:extra-paths ["core-utils/src"
+                                    "test-utils/src"]}}}
