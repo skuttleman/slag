@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 .SHELLFLAGS := -eu -o pipefail -c
 .ONESHELL:
-.PHONY: help check-deps lint test
+.PHONY: help check-deps build-test lint test
 .DEFAULT_GOAL := help
 
 # Tools (can be overridden in the environment)
@@ -35,13 +35,17 @@ check-deps: ## Verify required CLI tools are available (with install hints)
 	fi; \
 	echo "All required tools available (or npx fallbacks present)."
 
+build-test: ## Build test CLJS
+	@echo "building cljs tests..."
+	@$(CLJ) -A:shadow:test -M -m shadow.cljs.devtools.cli compile test
+
 lint: check-deps ## Check codebase for linting errors
 	@$(CLJ) -M:lint
 
-test: check-deps lint ## Run CLJS, server, and UI tests (requires clojure)
+test: check-deps lint build-test ## Run CLJS, server, and UI tests (requires clojure)
 	@if [ "$(INCLUDE_CLJS_TESTS)" = "true" ]; then \
 		echo "running CLJS tests..."; \
-		$(CLJ) -M:test -m slag.test.runner; \
+		$(CLJ) -M:test -m slag.test.cljs.runner; \
 	fi
 	@echo "running kaocha tests..."
 	@HEADLESS=true SCREENSHOT=true $(CLJ) -M:test -m kaocha.runner
